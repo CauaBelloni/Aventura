@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aventura Mágica Brasileira</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Cor de fundo suave */
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #00796b; /* Cor verde escuro */
+        }
+        .button {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #004d40; /* Cor verde escuro */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #00332e; /* Cor verde mais escuro */
+        }
+        #story {
+            margin-top: 20px;
+            white-space: pre-wrap;
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Aventura Mágica Brasileira</h1>
+    <div id="story">
+        <p id="storyText"></p>
+        <div id="options"></div>
+    </div>
+
+    <script>
+        const storyContent = {
+            intro: {
+                text: "Você está na floresta amazônica em busca de um artefato mágico perdido. O que você faz?",
+                options: {
+                    passar: "Seguir pelo caminho da esquerda",
+                    cachoeira: "Ir até a cachoeira",
+                    vila: "Procurar por uma vila"
+                }
+            },
+            passar: {
+                text: "Você segue pelo caminho da esquerda e encontra um antigo templo coberto de musgo.",
+                options: {
+                    templo: "Entrar no templo",
+                    voltar: "Voltar para o ponto inicial"
+                }
+            },
+            cachoeira: {
+                text: "Você chega à cachoeira e descobre um esconderijo atrás dela com uma caixa misteriosa.",
+                options: {
+                    abrir: "Abrir a caixa",
+                    nadar: "Nadar na cachoeira"
+                }
+            },
+            vila: {
+                text: "Você encontra uma vila local. Os habitantes estão dispostos a ajudá-lo, mas pedem que você ajude a resolver um problema local primeiro.",
+                options: {
+                    ajudar: "Ajudar os habitantes",
+                    pedirInfo: "Pedir informações sobre o artefato mágico"
+                }
+            },
+            templo: {
+                text: "Você entra no templo e se depara com um labirinto de salas antigas.",
+                options: {
+                    direita: "Explorar a sala à direita",
+                    esquerda: "Explorar a sala à esquerda",
+                    voltar: "Voltar para fora do templo"
+                }
+            },
+            abrir: {
+                text: "Você abre a caixa e encontra uma chave antiga e um pergaminho.",
+                options: {
+                    chave: "Usar a chave em um local ao redor da cachoeira",
+                    pergaminho: "Decifrar o pergaminho"
+                }
+            },
+            nadar: {
+                text: "Enquanto nada na cachoeira, você encontra uma entrada secreta em uma caverna.",
+                options: {
+                    explorar: "Explorar a caverna",
+                    voltar: "Voltar para o ponto inicial"
+                }
+            },
+            ajudar: {
+                text: "Você ajuda os habitantes da vila a resolver um problema com uma antiga criatura da floresta.",
+                options: {
+                    continuar: "Continuar a aventura com a ajuda dos habitantes",
+                    voltar: "Voltar para o ponto inicial"
+                }
+            },
+            pedirInfo: {
+                text: "Os habitantes revelam que o artefato está escondido em um local sagrado na floresta.",
+                options: {
+                    buscar: "Seguir para o local sagrado",
+                    voltar: "Voltar para o ponto inicial"
+                }
+            },
+            explorar: {
+                text: "Dentro da caverna, você encontra um antigo altar com inscrições misteriosas.",
+                options: {
+                    decifrar: "Decifrar as inscrições",
+                    voltar: "Voltar para o ponto inicial"
+                }
+            },
+            direita: {
+                text: "Você explora a sala à direita e encontra uma pista sobre o artefato.",
+                options: {
+                    seguir: "Seguir a pista",
+                    voltar: "Voltar para fora do templo"
+                }
+            },
+            esquerda: {
+                text: "Você explora a sala à esquerda e encontra uma biblioteca com livros sobre lendas.",
+                options: {
+                    ler: "Ler os livros",
+                    voltar: "Voltar para fora do templo"
+                }
+            },
+            decifrar: {
+                text: "Você decifra as inscrições e descobre a localização do artefato em uma caverna secreta.",
+                options: {
+                    procurar: "Procurar a caverna secreta",
+                    voltar: "Voltar para o ponto inicial"
+                }
+            },
+            buscar: {
+                text: "Você segue para o local sagrado e encontra o artefato mágico!",
+                options: {
+                    reiniciar: "Reiniciar a aventura",
+                    sair: "Sair do jogo"
+                }
+            }
+        };
+
+        function renderStory(key) {
+            const story = storyContent[key];
+            document.getElementById('storyText').innerText = story.text;
+            
+            let optionsHtml = '';
+            for (const [optionKey, optionText] of Object.entries(story.options)) {
+                optionsHtml += `<button class="button" onclick="renderStory('${optionKey}')">${optionText}</button>\n`;
+            }
+            document.getElementById('options').innerHTML = optionsHtml;
+        }
+
+        // Start the adventure
+        renderStory('intro');
+    </script>
+</body>
+</html>
